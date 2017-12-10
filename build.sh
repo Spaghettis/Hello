@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------
 
-# Basic script that might be portable to GNU/Linux and MacOS.
+# Basic script that might be portable on GNU/Linux and MacOS.
 # "Spaghettis" and "Hello" folders must be sibling in directory tree.
 # Requires Python (>= 3.4) installed.
 
