@@ -9,62 +9,84 @@
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-/* Locate the depedencies. */
+/* A no-op DSP object. */
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
-// MARK: -
+
+static t_class *hello_class;
+
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
 
 typedef struct _hello {
-    t_object x_obj;
+    t_object    x_obj;          /* MUST be the first. */
+    t_float     x_f;
+    t_outlet    *x_outlet;
     } t_hello;
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
+// MARK: -
 
-static t_class  *hello_class;
-static t_symbol *hello_path;
+static t_int *hello_perform (t_int *w)
+{
+    t_sample *in  = (t_sample *)(w[1]);
+    t_sample *out = (t_sample *)(w[2]);
+    int n = (int)(w[3]);
+    
+    while (n--) {
+        t_sample f = *in; *out = f; in++; out++;
+        // *in++ = *out++;
+    }
+    
+    return (w + 4);
+}
+
+static void hello_dsp (t_hello *x, t_signal **sp)
+{
+    dsp_add (hello_perform, 3,
+        signal_getVector (sp[0]),
+        signal_getVector (sp[1]),
+        signal_getVectorSize (sp[0]));
+}
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
-
-static void hello_bang (t_hello *x)
-{
-    post ("My path is %s", symbol_getName (hello_path));
-}
 
 static void *hello_new (void)
 {
-    return pd_new (hello_class);
+    t_hello *x  = (t_hello *)pd_new (hello_class);
+    
+    x->x_outlet = outlet_new (cast_object (x), gensym ("signal"));
+
+    return x;
 }
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
-/* Argument is the path to the directory that contains the external. */
-
-PD_STUB void helloRoot_setup (t_symbol *s)
+PD_STUB void hello_tilde_setup (void)               /* The "~" symbol is replaced by "_tilde". */
 {
     t_class *c = NULL;
     
-    c = class_new (gensym ("helloRoot"),
+    c = class_new (gensym ("hello~"),
             (t_newmethod)hello_new,
             NULL,
             sizeof (t_hello),
             CLASS_BOX,
             A_NULL);
+            
+    CLASS_SIGNAL (c, t_hello, x_f);
     
-    class_addBang (c, (t_method)hello_bang);
-    
-    class_setHelpDirectory (c, s);          /* Use it to locate the depedencies for instance. */
+    class_addDSP (c, (t_method)hello_dsp);
     
     hello_class = c;
-    hello_path  = s;
 }
 
-PD_STUB void helloRoot_destroy (void)
+PD_STUB void hello_tilde_destroy (void)
 {
     class_free (hello_class);
 }
