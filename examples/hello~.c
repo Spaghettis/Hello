@@ -31,6 +31,9 @@ typedef struct _hello {
 
 static t_int *hello_perform (t_int *w)
 {
+    /* Fetch the parameters. */
+    /* Note that the first (w[0]) is the adress of the function. */
+    
     t_sample *in  = (t_sample *)(w[1]);
     t_sample *out = (t_sample *)(w[2]);
     int n = (int)(w[3]);
@@ -40,11 +43,16 @@ static t_int *hello_perform (t_int *w)
         // *in++ = *out++;
     }
     
-    return (w + 4);
+    return (w + 4);     /* Extra care. It is the number of parameters required PLUS ONE. */
 }
 
 static void hello_dsp (t_hello *x, t_signal **sp)
 {
+    /* Add a function to the DSP chain callable with three parameters. */
+    /* First will be the vector in. */
+    /* Secondth will be the vector out. */
+    /* Third will be the vector size. */
+    
     dsp_add (hello_perform, 3,
         signal_getVector (sp[0]),
         signal_getVector (sp[1]),
@@ -68,7 +76,7 @@ static void *hello_new (void)
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
-PD_STUB void hello_tilde_setup (void)               /* The "~" symbol is replaced by "_tilde". */
+PD_STUB void hello_tilde_setup (void)       /* The "~" symbol is replaced by "_tilde". */
 {
     t_class *c = NULL;
     
@@ -78,8 +86,13 @@ PD_STUB void hello_tilde_setup (void)               /* The "~" symbol is replace
             sizeof (t_hello),
             CLASS_BOX,
             A_NULL);
-            
+    
+    /* Permit the first inlet to be usable with a float entry. */
+    /* In that case the signal is a constant valued vector. */
+    
     CLASS_SIGNAL (c, t_hello, x_f);
+    
+    /* Set the function called while constructing the DSP graph. */
     
     class_addDSP (c, (t_method)hello_dsp);
     
