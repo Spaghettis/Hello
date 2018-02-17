@@ -87,8 +87,8 @@ PD_STUB void hello_tilde_setup (void)       /* The "~" symbol is replaced by "_t
             CLASS_BOX,
             A_NULL);
     
-    /* Permit the first inlet to be usable with a float entry. */
-    /* In that case the signal is a constant valued vector. */
+    /* Permit the first inlet to be usable with a signal. */
+    /* In that case a float entry set the signal as a constant valued vector. */
     
     CLASS_SIGNAL (c, t_hello, x_f);
     
