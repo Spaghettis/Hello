@@ -67,7 +67,7 @@ static void *hello_new (void)
 {
     t_hello *x  = (t_hello *)pd_new (hello_class);
     
-    x->x_outlet = outlet_new (cast_object (x), gensym ("signal"));
+    x->x_outlet = outlet_newSignal (cast_object (x));
 
     return x;
 }
