@@ -113,7 +113,7 @@ PD_STUB void helloSimple_setup (t_symbol *s)
     class_addList (c, (t_method)hello_list);
     class_addAnything (c, (t_method)hello_anything);
     
-    /* Register a method without parameter. */
+    /* Register a method without additional parameter. */
     
     class_addMethod (c, (t_method)hello_post, gensym ("post"), A_NULL);
 
