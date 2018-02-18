@@ -11,4 +11,5 @@ Examples:
     helloBad.c          Manage failure at creation time.
     helloCPP.cpp        C++ spoken.
     hello~.c            A no-op DSP object.
+    helloSimple.c       A simple object.
 
