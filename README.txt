@@ -12,4 +12,5 @@ Examples:
     helloCPP.cpp        C++ spoken.
     hello~.c            A no-op DSP object.
     helloSimple.c       A simple object.
+    helloClick.c        Click me.
 
