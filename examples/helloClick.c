@@ -48,7 +48,7 @@ static void hello_click (t_hello *x, t_symbol *s, int argc, t_atom *argv)
     outlet_bang (x->x_outlet);
 }
 
-/* Called right after that the patcher that contains the object is instantiated. */
+/* Called right after that the patch that contains the object is instantiated. */
 /* Note that it can called later by user with a message. */
 
 static void hello_loadbang (t_hello *x)
@@ -56,7 +56,7 @@ static void hello_loadbang (t_hello *x)
     post ("Click me!");
 }
 
-/* Called when the patcher that contains the object will be closed. */
+/* Called when the patch that contains the object will be closed. */
 /* Note that it can called before by user with a message. */
 
 static void hello_closebang (t_hello *x)
