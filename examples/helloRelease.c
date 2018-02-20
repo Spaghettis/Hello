@@ -62,7 +62,7 @@ PD_STUB void helloRelease_destroy (void)
 {
     /* Here you can release an external resource acquired. */
     
-    class_free (hello_class);   /* Requiered to track memory leaks. */
+    class_free (hello_class);   /* Required to track memory leaks. */
 }
 
 // -----------------------------------------------------------------------------------------------------------
