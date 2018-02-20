@@ -1,0 +1,14 @@
+#N canvas 629 351 501 351 12;
+#X obj 12 12 cnv 15 250 45 empty empty empty 0 -7 0 10 #cccccc #000000;
+#X obj 48 96 bng 15 250 50 0 empty empty empty 17 7 0 10 #ffffff #000000 #000000;
+#X obj 48 252 print;
+#X text 24 24 hello (data);
+#X obj 48 216 helloData;
+#A list 1 swims with yellow flippers;
+#X msg 48 132 5 cats in the fish tank;
+#X msg 48 156 1 swims with yellow flippers;
+#X connect 1 0 4 0;
+#X connect 4 0 2 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
+#X coords 0 0 1 1 250 175 0 0 0;

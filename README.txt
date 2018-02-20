@@ -13,4 +13,4 @@ Examples:
     hello~.c            A no-op DSP object.
     helloSimple.c       A simple object.
     helloClick.c        Click me.
-
+    helloData.c         Save data with patch.
