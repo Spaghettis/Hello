@@ -14,3 +14,4 @@ Examples:
     helloSimple.c       A simple object.
     helloClick.c        Click me.
     helloData.c         Save data with patch.
+    helloDirty.c        The dirty flag.
