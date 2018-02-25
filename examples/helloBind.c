@@ -9,15 +9,15 @@
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-/* Click me. */
+/* Bind to symbol. */
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
 typedef struct _hello {
-    t_object    x_obj;              /* MUST be the first. */
-    t_outlet    *x_outlet;
+    t_object    x_obj;
+    t_symbol    *x_bound;
     } t_hello;
 
 // -----------------------------------------------------------------------------------------------------------
@@ -29,39 +29,38 @@ static t_class *hello_class;
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-static void hello_click (t_hello *x, t_symbol *s, int argc, t_atom *argv)
+/* Pointers to symbol can be cached locally (i.g. for efficiency). */
+
+static t_symbol *sym_s;
+static t_symbol *sym_something;
+static t_symbol *sym_Turlututu;
+
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+// MARK: -
+
+static void hello_bang (t_hello *x)
 {
-    // int coordinateX = (int)atom_getFloatAtIndex (0, argc, argv);
-    // int coordinateY = (int)atom_getFloatAtIndex (1, argc, argv);
-    // int shift       = (int)atom_getFloatAtIndex (2, argc, argv);
-    // int ctrl        = (int)atom_getFloatAtIndex (3, argc, argv);
-    // int alt         = (int)atom_getFloatAtIndex (4, argc, argv);
-    // int dblclick    = (int)atom_getFloatAtIndex (5, argc, argv);
-    // int clicked     = (int)atom_getFloatAtIndex (6, argc, argv);
+    int n = symbol_getNumberOfThings (sym_s);       /* Get the number of objects attached to the symbol. */
     
+    post ("We are %d at the party.", n);
+    
+    /* Send a message to all those objects. */
+    
+    if (symbol_hasThingQuiet (sym_s)) {
+    //
+    t_atom a; SET_SYMBOL (&a, sym_Turlututu); pd_message (symbol_getThing (sym_s), sym_something, 1, &a);
+    //
+    }
+}
+
+static void hello_something (t_hello *x, t_symbol *s, int argc, t_atom *argv)
+{
     char *t = atom_atomsToString (argc, argv);
     
-    post ("Click / %s", t);
+    post ("%s!", t);
     
-    PD_MEMORY_FREE (t);             /* Release the memory allocated for the string. */
-
-    outlet_bang (x->x_outlet);
-}
-
-/* Called right after that the patch that contains the object is instantiated. */
-/* Note that it can called later by user with a message. */
-
-static void hello_loadbang (t_hello *x)
-{
-    post ("Click me!");
-}
-
-/* Called when the patch that contains the object will be closed. */
-/* Note that it can called before by user with a message. */
-
-static void hello_closebang (t_hello *x)
-{
-    post ("Goodbye!");
+    PD_MEMORY_FREE (t);
 }
 
 // -----------------------------------------------------------------------------------------------------------
@@ -72,39 +71,43 @@ static void *hello_new (void)
 {
     t_hello *x = (t_hello *)pd_new (hello_class);
     
-    x->x_outlet = outlet_newBang (cast_object (x));
+    pd_bind (cast_pd (x), sym_s);           /* Attach the object to the symbol. */
     
     return x;
 }
 
 static void hello_free (t_hello *x)
 {
-
+    pd_unbind (cast_pd (x), sym_s);         /* Detach the object from the symbol. */
 }
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
-PD_STUB void helloClick_setup (t_symbol *s)
+PD_STUB void helloBind_setup (t_symbol *s)
 {
     t_class *c = NULL;
     
-    c = class_new (gensym ("helloClick"),
+    sym_s         = gensym ("_something_unique_and_unlikely_to_collide");
+    sym_something = gensym ("something");
+    sym_Turlututu = gensym ("Turlututu");
+    
+    c = class_new (gensym ("helloBind"),
             (t_newmethod)hello_new,
             (t_method)hello_free,
             sizeof (t_hello),
-            CLASS_BOX | CLASS_NOINLET,
+            CLASS_BOX,
             A_NULL);
     
-    class_addClick (c, (t_method)hello_click);              /* Called while clicking on the object. */
-    class_addLoadbang (c, (t_method)hello_loadbang);        /* Called at load. */
-    class_addClosebang (c, (t_method)hello_closebang);      /* Called at close. */
-
+    class_addBang (c, (t_method)hello_bang);
+    
+    class_addMethod (c, (t_method)hello_something, sym_something, A_GIMME, A_NULL);
+    
     hello_class = c;
 }
 
-PD_STUB void helloClick_destroy (void)
+PD_STUB void helloBind_destroy (void)
 {
     class_free (hello_class);
 }

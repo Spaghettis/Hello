@@ -15,3 +15,5 @@ Examples:
     helloClick.c        Click me.
     helloData.c         Save data with patch.
     helloDirty.c        The dirty flag.
+    helloBind.c         Bind to symbol.
+
