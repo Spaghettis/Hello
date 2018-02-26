@@ -1,12 +1,12 @@
-#N canvas 509 167 503 350 12;
+#N canvas 288 225 503 350 12;
 #X obj 12 12 cnv 15 250 45 empty empty empty 0 -7 0 10 #cccccc #000000;
 #X obj -60 12 freeze;
-#X obj 60 108 osc~ 0.5;
-#X obj 60 180 snapshot~ 0;
-#X floatatom 60 216 5 0 0 1 - - -;
+#X obj 60 156 osc~ 0.5;
+#X obj 60 228 snapshot~ 0;
+#X floatatom 60 264 5 0 0 1 - - -;
 #X f 5;
 #X text 24 24 hello~ (memory);
-#X obj 60 144 helloMemory~;
+#X obj 60 192 helloMemory~;
 #N canvas 254 466 382 195 reblocked 0;
 #X obj 228 108 block~ 256;
 #X obj 48 36 osc~ 0.5;
@@ -18,7 +18,8 @@
 #X connect 2 0 3 0;
 #X connect 4 0 2 0;
 #X coords 0 0 1 1 250 175 0 0 0;
-#X restore 276 144 pd reblocked;
+#X restore 240 192 pd reblocked;
+#X text 12 72 Memory cached (for efficiency).;
 #X connect 2 0 6 0;
 #X connect 3 0 4 0;
 #X connect 6 0 3 0;

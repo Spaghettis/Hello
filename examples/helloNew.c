@@ -36,8 +36,8 @@ static void *hello_new (t_symbol *s, int argc, t_atom *argv)
     
     char *t = atom_atomsToString (argc, argv);
     
-    post ("I'm a %s object.", symbol_getName (s));
-    post ("My arguments are / %s", t);
+    post ("I'm the %s object!", symbol_getName (s));
+    post ("Arguments / %s", t);
     
     PD_MEMORY_FREE (t);
     

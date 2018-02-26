@@ -43,7 +43,7 @@ static void hello_bang (t_hello *x)
 {
     int n = symbol_getNumberOfThings (sym_s);       /* Get the number of objects attached to the symbol. */
     
-    post ("We are %d at the party.", n);
+    post ("We are %d at the party...", n);
     
     /* Send a message to all those objects. */
     

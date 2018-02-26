@@ -10,6 +10,7 @@
 #X obj 60 348 print;
 #X msg 120 132 1 2 three;
 #X msg 168 228 symbol fish;
+#X text 12 72 Additional inlets.;
 #X connect 3 0 6 0;
 #X connect 4 0 3 1;
 #X connect 5 0 3 0;

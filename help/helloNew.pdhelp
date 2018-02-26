@@ -4,4 +4,5 @@
 #X text 24 24 hello (new);
 #X obj 60 156 helloNew 1 2 3 4;
 #X obj 168 204 helloNew fish tank;
+#X text 12 72 The arguments at instantiation.;
 #X coords 0 0 1 1 250 175 0 0 0;

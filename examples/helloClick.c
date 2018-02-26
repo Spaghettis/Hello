@@ -53,7 +53,7 @@ static void hello_click (t_hello *x, t_symbol *s, int argc, t_atom *argv)
 
 static void hello_loadbang (t_hello *x)
 {
-    post ("Click me!");
+    post ("Click me please!");
 }
 
 /* Called when the patch that contains the object will be closed. */

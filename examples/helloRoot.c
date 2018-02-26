@@ -31,7 +31,7 @@ static t_symbol *hello_path;
 
 static void hello_bang (t_hello *x)
 {
-    post ("My path is %s", symbol_getName (hello_path));
+    post ("%s", symbol_getName (hello_path));
 }
 
 static void *hello_new (void)

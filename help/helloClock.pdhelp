@@ -5,6 +5,7 @@
 #X text 24 24 hello (clock);
 #X obj 60 156 helloClock;
 #X obj 60 192 print;
+#X text 12 72 Schedule a task in time.;
 #X connect 2 0 4 0;
 #X connect 4 0 5 0;
 #X coords 0 0 1 1 250 175 0 0 0;

@@ -30,12 +30,12 @@ class Jojo {
     public:
         Jojo()
         {
-            post ("Jojo contructor");
+            post ("Jojo contructor...");
         }
     
         ~Jojo()
         {
-            post ("Jojo destructor");
+            post ("Jojo destructor...");
         }
 };
 

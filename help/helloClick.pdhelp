@@ -2,7 +2,8 @@
 #X obj 12 12 cnv 15 250 45 empty empty empty 0 -7 0 10 #cccccc #000000;
 #X obj -60 12 freeze;
 #X text 24 24 hello (click);
-#X obj 48 132 helloClick;
-#X obj 60 192 bng 15 250 50 0 empty empty empty 0 0 0 10 #ffffff #000000 #000000;
+#X obj 108 144 helloClick;
+#X obj 120 204 bng 15 250 50 0 empty empty empty 0 0 0 10 #ffffff #000000 #000000;
+#X text 12 72 Click me.;
 #X connect 3 0 4 0;
 #X coords 0 0 1 1 250 175 0 0 0;
