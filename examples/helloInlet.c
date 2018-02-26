@@ -9,62 +9,83 @@
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-/* Locate the dependencies. */
+/* Additional inlets. */
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
 typedef struct _hello {
-    t_object x_obj;
+    t_object    x_obj;
+    t_float     x_f;                    /* Member to contain the value. */
+    t_symbol    *x_s;                   /* Ditto. */
+    t_outlet    *x_outlet;
     } t_hello;
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
+// MARK: -
 
-static t_class  *hello_class;
-static t_symbol *hello_path;
+static t_class *hello_class;
+
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+
+static void hello_float (t_hello *x, t_float f)
+{
+    t_atom a[3];
+    
+    SET_FLOAT  (a + 0, f);
+    SET_FLOAT  (a + 1, x->x_f);
+    SET_SYMBOL (a + 2, x->x_s);
+    
+    outlet_list (x->x_outlet, 3, a);
+}
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
-
-static void hello_bang (t_hello *x)
-{
-    post ("My path is %s", symbol_getName (hello_path));
-}
 
 static void *hello_new (void)
 {
-    return pd_new (hello_class);
+    t_hello *x = (t_hello *)pd_new (hello_class);
+    
+    /* Create additional inlets from left to right. */
+    
+    inlet_newFloat (cast_object (x), &x->x_f);
+    inlet_newSymbol (cast_object (x), &x->x_s);
+    
+    /* Initialize them with default values. */
+    
+    x->x_f = 0;
+    x->x_s = gensym ("foo");
+    
+    x->x_outlet = outlet_newList (cast_object (x));
+    
+    return x;
 }
 
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
-/* Argument is the path to the directory that contains the external. */
-
-PD_STUB void helloRoot_setup (t_symbol *s)
+PD_STUB void helloInlet_setup (t_symbol *s)
 {
     t_class *c = NULL;
     
-    c = class_new (gensym ("helloRoot"),
+    c = class_new (gensym ("helloInlet"),
             (t_newmethod)hello_new,
             NULL,
             sizeof (t_hello),
             CLASS_BOX,
             A_NULL);
     
-    class_addBang (c, (t_method)hello_bang);
-    
-    class_setHelpDirectory (c, s);          /* Use it to locate the depedencies for instance. */
-    
+    class_addFloat (c, (t_method)hello_float);
+
     hello_class = c;
-    hello_path  = s;
 }
 
-PD_STUB void helloRoot_destroy (void)
+PD_STUB void helloInlet_destroy (void)
 {
     class_free (hello_class);
 }
