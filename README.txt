@@ -18,4 +18,5 @@ Examples:
     helloData.c         Save data with patch.
     helloDirty.c        The dirty flag.
     helloBind.c         Bind to symbol.
+    helloClock.c        Schedule a task in time.
 
