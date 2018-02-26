@@ -102,6 +102,8 @@ PD_STUB void helloBind_setup (t_symbol *s)
     
     class_addBang (c, (t_method)hello_bang);
     
+    /* Register a method with variable parameters. */
+    
     class_addMethod (c, (t_method)hello_something, sym_something, A_GIMME, A_NULL);
     
     hello_class = c;
