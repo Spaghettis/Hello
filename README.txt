@@ -13,6 +13,7 @@ Examples:
     hello~.c            A no-op DSP object.
     helloSimple.c       A simple object.
     helloInlet.c        Additional inlets.
+    helloNew.c          The arguments at instantiation.
     helloClick.c        Click me.
     helloData.c         Save data with patch.
     helloDirty.c        The dirty flag.
