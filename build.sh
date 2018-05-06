@@ -15,10 +15,10 @@ python3 ../Spaghettis/src/m_spaghettis.h src/*.c src/*.cpp
 # ------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------
 
-mv examples/*.pdbundle64 help/ 2> /dev/null
-mv examples/*.pdbundle32 help/ 2> /dev/null
-mv examples/*.pdobject64 help/ 2> /dev/null
-mv examples/*.pdobject32 help/ 2> /dev/null
+mv src/*.pdbundle64 help/ 2> /dev/null
+mv src/*.pdbundle32 help/ 2> /dev/null
+mv src/*.pdobject64 help/ 2> /dev/null
+mv src/*.pdobject32 help/ 2> /dev/null
 
 # ------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------
