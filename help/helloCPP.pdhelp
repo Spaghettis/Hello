@@ -1,8 +1,8 @@
-#N canvas 278 360 500 350 12;
-#X obj 12 12 cnv 15 250 45 empty empty empty 0 -7 0 10 #cccccc #000000;
+#N canvas 559 215 300 199 12;
+#X obj 12 12 cnv 15 275 45 empty empty empty 0 -7 0 10 #cccccc #000000;
 #X obj -60 12 freeze;
-#X obj 72 192 helloCPP;
-#X obj 60 144 bng 15 250 50 0 empty empty empty 17 7 0 10 #ffffff #000000 #000000;
+#X obj 36 144 helloCPP;
+#X obj 36 108 bng 15 250 50 0 empty empty empty 17 7 0 10 #ffffff #000000 #000000;
 #X text 24 24 hello (C++);
 #X f 11;
 #X text 12 72 C++ spoken.;

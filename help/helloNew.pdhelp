@@ -1,8 +1,8 @@
-#N canvas 549 144 500 350 12;
-#X obj 12 12 cnv 15 250 45 empty empty empty 0 -7 0 10 #cccccc #000000;
+#N canvas 561 196 300 180 12;
+#X obj 12 12 cnv 15 275 45 empty empty empty 0 -7 0 10 #cccccc #000000;
 #X obj -60 12 freeze;
 #X text 24 24 hello (new);
-#X obj 60 156 helloNew 1 2 3 4;
-#X obj 168 204 helloNew fish tank;
+#X obj 36 108 helloNew 1 2 3 4;
+#X obj 36 132 helloNew fish tank;
 #X text 12 72 The arguments at instantiation.;
 #X coords 0 0 1 1 250 175 0 0 0;
