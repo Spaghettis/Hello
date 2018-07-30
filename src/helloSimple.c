@@ -32,7 +32,7 @@ static t_class *hello_class;
 
 static void hello_post (t_hello *x)
 {
-    char *s = buffer_toString (x->x_buffer);
+    char *s = atom_atomsToString (buffer_getSize (x->x_buffer), buffer_getAtoms (x->x_buffer));
     
     if (!*s) { post ("I'm empty!"); }
     else {
