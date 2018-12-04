@@ -98,7 +98,7 @@ static void *hello_new (void)
     }
     
     if (err) {
-        pd_free (cast_pd (x));
+        pd_free ((t_pd *)x);
         x = NULL;
     }
     //

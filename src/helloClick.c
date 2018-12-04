@@ -72,7 +72,7 @@ static void *hello_new (void)
 {
     t_hello *x = (t_hello *)pd_new (hello_class);
     
-    x->x_outlet = outlet_newBang (cast_object (x));
+    x->x_outlet = outlet_newBang ((t_object *)x);
     
     return x;
 }

@@ -82,7 +82,7 @@ static void *hello_new (void)
     t_hello *x = (t_hello *)pd_new (hello_class);
     
     x->x_buffer = buffer_new();                             /* Allocate a buffer at instantiation. */
-    x->x_outlet = outlet_newList (cast_object (x));
+    x->x_outlet = outlet_newList ((t_object *)x);
     
     return x;
 }

@@ -21,7 +21,6 @@ static t_class *hello_class;
 
 typedef struct _hello {
     t_object    x_obj;          /* MUST be the first. */
-    t_float     x_f;
     t_outlet    *x_outlet;
     } t_hello;
 
@@ -46,6 +45,8 @@ static t_int *hello_perform (t_int *w)
     return (w + 4);     /* Extra care. It is the number of parameters required PLUS ONE. */
 }
 
+/* Warning: note that the dsp method could be called concurrently with the perform method. */
+
 static void hello_dsp (t_hello *x, t_signal **sp)
 {
     /* Add a function to the DSP chain callable with three parameters. */
@@ -67,7 +68,7 @@ static void *hello_new (void)
 {
     t_hello *x  = (t_hello *)pd_new (hello_class);
     
-    x->x_outlet = outlet_newSignal (cast_object (x));
+    x->x_outlet = outlet_newSignal ((t_object *)x);
 
     return x;
 }
@@ -80,17 +81,15 @@ PD_STUB void hello_tilde_setup (void)       /* The "~" symbol is replaced by "_t
 {
     t_class *c = NULL;
     
+    /* CLASS_SIGNAL flag makes the first inlet to be signal type. */
+    /* In that case a float entry set the signal as a constant valued vector. */
+    
     c = class_new (gensym ("hello~"),
             (t_newmethod)hello_new,
             NULL,
             sizeof (t_hello),
-            CLASS_BOX,
+            CLASS_BOX | CLASS_SIGNAL,
             A_NULL);
-    
-    /* Permit the first inlet to be usable with a signal. */
-    /* In that case a float entry set the signal as a constant valued vector. */
-    
-    CLASS_SIGNAL (c, t_hello, x_f);
     
     /* Set the function called while constructing the DSP graph. */
     

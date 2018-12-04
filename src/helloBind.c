@@ -49,7 +49,7 @@ static void hello_bang (t_hello *x)
     
     if (symbol_hasThingQuiet (sym_s)) {
     //
-    t_atom a; SET_SYMBOL (&a, sym_Turlututu); pd_message (symbol_getThing (sym_s), sym_something, 1, &a);
+    t_atom a; atom_setSymbol (&a, sym_Turlututu); pd_message (symbol_getThing (sym_s), sym_something, 1, &a);
     //
     }
 }
@@ -71,14 +71,14 @@ static void *hello_new (void)
 {
     t_hello *x = (t_hello *)pd_new (hello_class);
     
-    pd_bind (cast_pd (x), sym_s);           /* Attach the object to the symbol. */
+    pd_bind ((t_pd *)x, sym_s);             /* Attach the object to the symbol. */
     
     return x;
 }
 
 static void hello_free (t_hello *x)
 {
-    pd_unbind (cast_pd (x), sym_s);         /* Detach the object from the symbol. */
+    pd_unbind ((t_pd *)x, sym_s);           /* Detach the object from the symbol. */
 }
 
 // -----------------------------------------------------------------------------------------------------------

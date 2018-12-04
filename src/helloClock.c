@@ -30,13 +30,11 @@ static t_class *hello_class;
 // -----------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-/* The task to perform (output a random number here). */
+/* The task to perform. */
 
 static void hello_task (t_hello *x)
 {
-    static int once = 0; static t_rand48 seed; if (!once) { PD_RAND48_INIT (seed); once = 1; }
-    
-    outlet_float (x->x_outlet, PD_RAND48_DOUBLE (seed));
+    static int counter = 0; outlet_float (x->x_outlet, counter++);
 }
 
 // -----------------------------------------------------------------------------------------------------------
@@ -47,7 +45,7 @@ static void hello_bang (t_hello *x)
 {
     /* Schedule the task. */
     
-    clock_delay (x->x_clock, PD_SECONDS_TO_MILLISECONDS (1.0));
+    clock_delay (x->x_clock, 1000.0);
     
     /* Note that it is allowed to schedule the clock inside a DSP perform. */
     /* In fact, it IS the proper way for DSP to interact with control flow. */
@@ -62,7 +60,7 @@ static void *hello_new (void)
 {
     t_hello *x  = (t_hello *)pd_new (hello_class);
     
-    x->x_outlet = outlet_newFloat (cast_object (x));
+    x->x_outlet = outlet_newFloat ((t_object *)x);
     
     /* Register the clock with the task to attach. */
     

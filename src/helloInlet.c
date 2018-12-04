@@ -35,9 +35,9 @@ static void hello_float (t_hello *x, t_float f)
 {
     t_atom a[3];
     
-    SET_FLOAT  (a + 0, f);
-    SET_FLOAT  (a + 1, x->x_f);
-    SET_SYMBOL (a + 2, x->x_s);
+    atom_setFloat  (a + 0, f);
+    atom_setFloat  (a + 1, x->x_f);
+    atom_setSymbol (a + 2, x->x_s);
     
     outlet_list (x->x_outlet, 3, a);
 }
@@ -52,15 +52,15 @@ static void *hello_new (void)
     
     /* Create additional inlets from left to right. */
     
-    inlet_newFloat (cast_object (x), &x->x_f);
-    inlet_newSymbol (cast_object (x), &x->x_s);
+    inlet_newFloat ((t_object *)x, &x->x_f);
+    inlet_newSymbol ((t_object *)x, &x->x_s);
     
     /* Initialize them with default values. */
     
     x->x_f = 0;
     x->x_s = gensym ("foo");
     
-    x->x_outlet = outlet_newList (cast_object (x));
+    x->x_outlet = outlet_newList ((t_object *)x);
     
     return x;
 }

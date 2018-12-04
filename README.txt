@@ -15,8 +15,6 @@ Examples:
     helloInlet.c        Additional inlets.
     helloNew.c          The arguments at instantiation.
     helloClick.c        Click me.
-    helloDirty.c        The dirty flag.
     helloBind.c         Bind to symbol.
     helloClock.c        Schedule a task in time.
-    helloMemory~.c      Memory cached (for efficiency).
 
