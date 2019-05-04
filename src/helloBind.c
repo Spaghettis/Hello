@@ -39,14 +39,10 @@ static t_symbol *sym_Turlututu;
 // -----------------------------------------------------------------------------------------------------------
 // MARK: -
 
+/* Send a message to all objects attached. */
+
 static void hello_bang (t_hello *x)
 {
-    int n = symbol_getNumberOfThings (sym_s);       /* Get the number of objects attached to the symbol. */
-    
-    post ("We are %d at the party...", n);
-    
-    /* Send a message to all those objects. */
-    
     if (symbol_hasThingQuiet (sym_s)) {
     //
     t_atom a; atom_setSymbol (&a, sym_Turlututu); pd_message (symbol_getThing (sym_s), sym_something, 1, &a);
