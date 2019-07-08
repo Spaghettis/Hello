@@ -54,7 +54,7 @@ static void hello_dsp (t_hello *x, t_signal **sp)
     /* Secondth will be the vector out. */
     /* Third will be the vector size. */
     
-    dsp_add (hello_perform, 3,
+    dsp_add3 (hello_perform,
         signal_getVector (sp[0]),
         signal_getVector (sp[1]),
         signal_getVectorSize (sp[0]));
