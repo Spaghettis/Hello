@@ -5,7 +5,7 @@ A series of dummy plugins.
 
 Remark:
 
-    Consider first to suggest your object to be native.
+    First suggest your object to be native.
 
 Disclaimer:
 
@@ -30,3 +30,4 @@ Examples:
     helloSpace~.c       Add closures to the DSP chain.
     helloData~.c        Encapsulation safety for DSP object.
     helloBiquad~.c      Biquad anatomized.
+
