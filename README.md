@@ -3,15 +3,11 @@
 
 A series of dummy plugins.
 
-Remark:
+## Disclaimer
 
-    First suggest your object to be native.
-
-Disclaimer:
-
-    The API is NOT mature (subject to change in the future).
-    
-Examples:
+The API is NOT mature (subject to change in the future).
+        
+## Examples
 
     hello.c             Hello world!
     helloRoot.c         Locate the dependencies.
